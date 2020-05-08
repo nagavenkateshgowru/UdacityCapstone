@@ -5,6 +5,14 @@ from flask import Flask
 APP = Flask(__name__)
 
 
+@APP.route('/v1/health')
+def health():
+    """
+    health end point
+    :return:
+    """
+    return 'UP'
+
 @APP.route('/')
 def hello_world():
     """
@@ -15,4 +23,4 @@ def hello_world():
 
 
 if __name__ == "__main__":
-    APP.run()
+    APP.run(host='0.0.0.0', port=80, debug=True)
