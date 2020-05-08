@@ -1,0 +1,28 @@
+---
+- name: Playbook to install kubelet kubeadm kubectl
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Add Kubernetes GPG apt Key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+    - name: Add Kubernetes Repository
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+    - name: apt update for docker
+      apt:
+        update_cache: yes
+    - name: Install kubelet kubeadm kubectl
+      apt:
+        pkg:
+          - kubelet
+          - kubeadm
+          - kubectl
+    - name: restart service docker, in all cases, also issue daemon-reload to pick up config changes
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: kubelet

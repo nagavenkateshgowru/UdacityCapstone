@@ -1,0 +1,8 @@
+---
+- name: Playbook to disable swap
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Disabling Swap on all nodes
+      shell: swapoff -a

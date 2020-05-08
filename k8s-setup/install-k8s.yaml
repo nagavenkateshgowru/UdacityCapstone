@@ -1,0 +1,4 @@
+---
+- import_playbook: playbooks/install-docker.yaml
+- import_playbook: playbooks/disable-swap.yaml
+- import_playbook: playbooks/install-kube.yaml
