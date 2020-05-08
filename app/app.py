@@ -2,10 +2,10 @@
 Flask App
 """
 from flask import Flask
-app = Flask(__name__)
+APP = Flask(__name__)
 
 
-@app.route('/')
+@APP.route('/')
 def hello_world():
     """
     hello world function
@@ -15,4 +15,4 @@ def hello_world():
 
 
 if __name__ == "__main__":
-    app.run()
+    APP.run()
