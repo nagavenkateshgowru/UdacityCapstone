@@ -13,6 +13,8 @@ def health():
     """
     return 'UP'
 
+fail_here
+
 @APP.route('/')
 def hello_world():
     """
