@@ -1,0 +1,18 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('Hello') {
+         steps {
+            echo 'Hello World'
+         }
+      }
+      stage('Deploy') {
+         steps {
+            echo "IMAGE is: ${params.IMAGE_NAME}"
+            echo "kubectl set image deployments/capstone-deployment simple-flask= ${params.IMAGE_NAME}"
+            sh "kubectl set image deployments/capstone-deployment simple-flask=${params.IMAGE_NAME}"
+         }
+      }
+   }
+}

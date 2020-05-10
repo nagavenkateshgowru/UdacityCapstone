@@ -36,5 +36,17 @@ pipeline {
             sh 'docker build -t test:0.${BUILD_ID} .'
          }
       }
+       stage('Push Image') {
+         steps {
+            sh 'docker tag test:0.${BUILD_ID} nagavenkateshg/udacitycapstone:0.${BUILD_ID}'
+            sh 'docker push nagavenkateshg/udacitycapstone:0.${BUILD_ID}'
+         }
+      }
+       stage('Invoking some other Jenkins job') {
+            steps {
+                echo "Building my-other-job-name"
+                build job: 'UdacityCD', parameters: [string(name: 'IMAGE_NAME', value: 'nagavenkateshg/udacitycapstone:0.' + String.valueOf(BUILD_ID))]
+            }
+      }
    }
 }
