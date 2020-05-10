@@ -19,7 +19,7 @@ def hello_world():
     hello world function
     :return:
     """
-    return 'Udacity Capstone Project'
+    return 'Udacity Capstone Project - V2'
 
 
 if __name__ == "__main__":
