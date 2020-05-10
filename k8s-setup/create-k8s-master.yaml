@@ -1,0 +1,3 @@
+---
+- import_playbook: playbooks/create-sg.yaml
+- import_playbook: playbooks/create-ec2.yaml

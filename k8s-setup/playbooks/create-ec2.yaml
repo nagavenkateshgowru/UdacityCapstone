@@ -1,0 +1,28 @@
+---
+- name: Creation of ec2 instance
+  hosts: localhost
+
+  tasks:
+    - include_vars: aws_credentials.yml
+    - name: Create EC2 instance
+      ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        key_name: udacity-project
+        instance_type: t2.medium
+        image: ami-0b44050b2d893d5f7
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-f2cf79be
+        assign_public_ip: yes
+        region: ap-south-1
+        group: k8s-sg
+        instance_tags:
+           Name: "k8s-master"
+      register: ec2
+    - debug:
+        var: ec2
+    - name: write daemon.json to file
+      copy: 
+        content: "k8s-master ansible_host={{ ec2['instances'][0]['private_ip'] }} ansible_user=ubuntu\n"
+        dest: /var/lib/jenkins/ansible/k8s-setup/hosts

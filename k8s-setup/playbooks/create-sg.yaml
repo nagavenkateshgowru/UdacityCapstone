@@ -1,0 +1,23 @@
+---
+- name: Creation of a security group
+  hosts: localhost
+
+  tasks:
+    - include_vars: aws_credentials.yml
+    - name: Create K8S node securitygroup
+      ec2_group:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        name: k8s-sg
+        description: k8s security group
+        vpc_id: vpc-d9c59db1
+        region: ap-south-1
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 0
+            to_port: 65535
+            cidr_ip: 172.31.0.0/20

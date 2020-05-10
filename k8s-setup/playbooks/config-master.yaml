@@ -33,3 +33,10 @@
     
     - name: Install Network Add-on
       command: kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+
+    - name: Copy kube config from master to local jenkins
+      fetch:
+        src: /etc/kubernetes/admin.conf
+        dest: /var/lib/jenkins/ansible/k8s-setup/kube_config
+        flat: yes
+
