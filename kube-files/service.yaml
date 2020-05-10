@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-05-10T01:50:04Z"
+  labels:
+    app: flask
+  name: capstone-service
+  namespace: default
+  resourceVersion: "167"
+  selfLink: /api/v1/namespaces/default/services/kubernetes-bootcamp
+  uid: e2b40f90-c8e8-45c1-b206-fb555d4192cc
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30879
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: flask
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
